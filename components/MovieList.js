@@ -1,5 +1,5 @@
-import gql from 'graphql-tag';
 import React, {Component, useEffect, useState} from 'react';
+import { API_KEY } from 'react-native-dotenv'
 import {
 	Text,
 	View, 
@@ -22,7 +22,7 @@ export function MovieList(props) {
 		const [movies, setMovies] = useState(0);
 
 		function fetchMovies() {
-			const data = fetch('http://localhost:5050/graphql', {
+			const data = fetch(API_KEY, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ query: `{
