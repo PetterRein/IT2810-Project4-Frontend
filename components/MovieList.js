@@ -21,26 +21,28 @@ function Movie({ movieObject }) {
 export function MovieList(props) {
 		const [movies, setMovies] = useState(0);
 
-		function fetchMovies() {
-			const data = fetch(API_KEY, {
+		async function fetchMovies() {
+			const res = await fetch(API_KEY, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ query: `{
+				body: JSON.stringify({
+				query: `{
 					movies {
 						title,
 						id,
 						release_date
 					}
 				}` }),
-			}).then(res => {
-				return res.json()
-			})
-			return data
+			});
+			return res.json();
 		}
 
 	  useEffect(() => {
 			fetchMovies().then(response => {
 				setMovies(response.data.movies);
+			}).catch(function(error) {
+				console.log('There has been a problem with your fetch operation: ' + error.message);
+				throw error;
 			});
 		}, []);
 
