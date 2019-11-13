@@ -4,15 +4,20 @@ import {
 	Text,
 	View, 
 	FlatList,
-  StyleSheet,
+	StyleSheet,
+	Image,
 } from 'react-native';
 
 
 function Movie({ movieObject }) {
 	return (
 		<View  style={styles.container}>
-			<Text >{movieObject.title}</Text>
-			<Text >{movieObject.release_date}</Text>
+			<Image
+        style={{width: 150, height: 300}}
+        source={{uri: API_KEY + '/images' + movieObject.poster_path}}
+      />
+			<Text style={styles.text}>{movieObject.title}</Text>
+			<Text style={styles.text}>{movieObject.release_date}</Text>
 		</View>
 	);
 }
@@ -22,15 +27,16 @@ export function MovieList(props) {
 		const [movies, setMovies] = useState(0);
 
 		async function fetchMovies() {
-			const res = await fetch(API_KEY, {
+			const res = await fetch(API_KEY + '/graphql', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
 				query: `{
-					movies {
+					movies (first: ${props.first}, skip: ${props.skip}){
 						title,
 						id,
-						release_date
+						release_date,
+						poster_path
 					}
 				}` }),
 			});
@@ -61,12 +67,15 @@ export function MovieList(props) {
 const styles = StyleSheet.create({
 	  container: {
 			   flex: 1,
-			   paddingTop: 22
+				 paddingTop: 22,
+				 paddingLeft: 22,
 			  },
 	  item: {
 			    padding: 10,
-			    fontSize: 18,
-			    height: 44,
-			  },
+			    height: 100,
+				},
+		text: {
+			fontSize: 30
+		}
 })
 
