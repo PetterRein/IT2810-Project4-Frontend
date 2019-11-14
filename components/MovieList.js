@@ -27,43 +27,47 @@ function Movie({ movieObject }) {
 
 
 export function MovieList(props) {
-		const [movies, setMovies] = useState(0);
-		const [{ first, skip, sortField, sortDir }, dispatch] = useStateValue();
+		const [{ first, skip, sortField, sortDir, movies }, dispatch] = useStateValue();
 
 		async function fetchMovies() {
-			const res = await fetch(API_KEY + '/graphql', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-				query: `{
-					movies (first: ${first}, skip: ${skip}, sortField: "${sortField}", sortDir: ${sortDir}){
-						title,
-						id,
-						release_date,
-						poster_path,
-						vote_average
-					}
-				}` }),
-			});
-			return res.json();
+			try {
+				const res = await fetch(API_KEY + '/graphql', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+					query: `{
+						movies (first: ${first}, skip: ${skip}, sortField: "${sortField}", sortDir: ${sortDir}){
+							title,
+							id,
+							release_date,
+							poster_path,
+							vote_average
+						}
+					}` }),
+				});
+				let responseJson = await res.json()
+				return responseJson.data.movies
+			} catch (error) {
+				console.log(error)
+			}
 		}
 
 	  useEffect(() => {
-			fetchMovies().then(response => {
-				setMovies(response.data.movies);
-			}).catch(function(error) {
-				console.log('There has been a problem with your fetch operation: ' + error.message);
-				throw error;
-			});
+			fetchMovies().then(movies =>
+				dispatch({
+					type: 'UPDATE_MOVIES',
+					movies: movies
+				})
+			)
 		}, [ first, skip, sortField, sortDir ]);
 
-
 	return (
+		movies.length ? 
 			<FlatList
 				data={movies}
 				renderItem={({ item }) => <Movie movieObject={item} />}
 				keyExtractor={item => item.id}
-			/>
+			/> : <></>
 		);
 }
 

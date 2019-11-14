@@ -2,9 +2,10 @@ import React, {createContext, useContext, useReducer} from 'react';
 
 export const initialState = {
   sortField: "title",
-  sortDir: "true",
+  sortDir: true,
   first: 6,
-  skip: 0
+  skip: 0,
+  movies: []
 }
 
 export const reducer = (state, action) => {
@@ -19,6 +20,12 @@ export const reducer = (state, action) => {
           ...state,
           sortField: action.sortField
       };
+
+      case 'UPDATE_MOVIES':
+        return {
+            ...state,
+            movies: action.movies
+        };
     
     default:
       return state;
