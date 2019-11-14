@@ -62,7 +62,7 @@ export function MovieList(props) {
 		}, [ first, skip, sortField, sortDir ]);
 
 	return (
-		movies.length ? 
+		movies && movies.length ? 
 			<FlatList
 				data={movies}
 				renderItem={({ item }) => <Movie movieObject={item} />}
