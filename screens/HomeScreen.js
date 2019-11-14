@@ -18,6 +18,7 @@ import { MovieList } from '../components/MovieList'
 
 import {initialState, reducer, StateProvider} from '../store/Store'
 import { ScoreQuerySelector } from '../components/ScoreQuerySelector';
+import { SearchField } from '../components/SearchQuerySelector';
 
 export default function HomeScreen() {
 
@@ -26,6 +27,7 @@ export default function HomeScreen() {
 		<SafeAreaView style={styles.container}>
 			<SortQuerySelector />
 			<ScoreQuerySelector />
+			<SearchField />
       <MovieList/>
 		</SafeAreaView>
 	</StateProvider>
