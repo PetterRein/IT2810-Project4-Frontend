@@ -1,5 +1,7 @@
 import React, {Component, useEffect, useState} from 'react';
 import { API_KEY } from 'react-native-dotenv'
+import { useStateValue } from '../store/Store';
+
 import {
 	Text,
 	View, 
@@ -18,6 +20,7 @@ function Movie({ movieObject }) {
       />
 			<Text style={styles.text}>{movieObject.title}</Text>
 			<Text style={styles.text}>{movieObject.release_date}</Text>
+			<Text style={styles.text}>{movieObject.vote_average}</Text>
 		</View>
 	);
 }
@@ -25,18 +28,19 @@ function Movie({ movieObject }) {
 
 export function MovieList(props) {
 		const [movies, setMovies] = useState(0);
-
+		const [{ first, skip, sortField, sortDir }, dispatch] = useStateValue();
 		async function fetchMovies() {
 			const res = await fetch(API_KEY + '/graphql', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
 				query: `{
-					movies (first: ${props.first}, skip: ${props.skip}){
+					movies (first: ${first}, skip: ${skip}, sortField: "${sortField}", sortDir: ${sortDir}){
 						title,
 						id,
 						release_date,
-						poster_path
+						poster_path,
+						vote_average
 					}
 				}` }),
 			});
@@ -50,7 +54,7 @@ export function MovieList(props) {
 				console.log('There has been a problem with your fetch operation: ' + error.message);
 				throw error;
 			});
-		}, []);
+		}, [{ first, skip, sortField, sortDir }, dispatch]);
 
 
 	return (

@@ -36,7 +36,7 @@ function RadioButtons (props) {
 };
 export const SortQuerySelector = () => {
   const [{ sortField, sortDir }, dispatch] = useStateValue();
-  const sortFields = [{ name: 'Title', value: 'title', type: 'field' }, { name: 'Release Date', value: 'release_date', type: 'field' }, { name: 'Score', value: 'vote_average', type: 'field' }, { name: 'None fields', value: '', type: 'field' }]
+  const sortFields = [{ name: 'Title', value: 'title', type: 'field' }, { name: 'Release Date', value: 'release_date', type: 'field' }, { name: 'Score', value: 'vote_average', type: 'field' }]
   const sortFieldButtons = sortFields.map((field) =>
     <RadioButtons checked={sortField} key={field.name} name={field.name} value={field.value} type={field.type} onPress={(value) => { 
       dispatch({

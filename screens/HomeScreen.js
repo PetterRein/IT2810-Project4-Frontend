@@ -18,15 +18,13 @@ import { MovieList } from '../components/MovieList'
 
 import {initialState, reducer, StateProvider} from '../store/Store'
 
-          <Text style={styles.getStartedText}>Get started by opening</Text>
-
 export default function HomeScreen() {
 
   return (
 	<StateProvider initialState={initialState} reducer={reducer}>
 		<SafeAreaView style={styles.container}>
 			<SortQuerySelector />
-            <MovieList/>
+      <MovieList/>
 		</SafeAreaView>
 	</StateProvider>
 	);
