@@ -6,6 +6,7 @@ export const initialState = {
   first: 6,
   skip: 0,
   score: 0,
+  search: "",
   movies: []
 }
 
@@ -32,6 +33,12 @@ export const reducer = (state, action) => {
       return {
           ...state,
           score: action.score
+      };
+
+    case 'UPDATE_SEARCH':
+      return {
+          ...state,
+          search: action.search
       };
     
     default:
