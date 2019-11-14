@@ -1,8 +1,10 @@
 import React, {createContext, useContext, useReducer} from 'react';
 
 export const initialState = {
-  sortField: "",
-  sortDir: "true"
+  sortField: "title",
+  sortDir: "true",
+  first: 6,
+  skip: 0
 }
 
 export const reducer = (state, action) => {

@@ -14,9 +14,9 @@ import {
 import { MonoText } from '../components/StyledText';
 
 import { SortQuerySelector } from '../components/SortQuerySelector'
+import { MovieList } from '../components/MovieList'
 
 import {initialState, reducer, StateProvider} from '../store/Store'
-
 
 export default function HomeScreen() {
 
@@ -24,6 +24,7 @@ export default function HomeScreen() {
 	<StateProvider initialState={initialState} reducer={reducer}>
 		<SafeAreaView style={styles.container}>
 			<SortQuerySelector />
+      <MovieList/>
 		</SafeAreaView>
 	</StateProvider>
 	);
