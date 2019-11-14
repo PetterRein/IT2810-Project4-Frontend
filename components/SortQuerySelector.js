@@ -43,7 +43,7 @@ export const SortQuerySelector = () => {
         type: 'UPDATE_SORTFIELD',
         sortField: value
       })}}/>)
-  const sortFieldDirectionection = [{ name:'DESC', value: "true", type: 'direction' }, { name: 'ASC', value: "false", type: 'direction' }]
+  const sortFieldDirectionection = [{ name:'DESC', value: true, type: 'direction' }, { name: 'ASC', value: false, type: 'direction' }]
   const sortFieldDirectionectionButtons = sortFieldDirectionection.map((direction) =>
     <RadioButtons checked={sortDir} key={direction.name} name={direction.name} value={direction.value} type={direction.type} onPress={(value) => { 
       dispatch({

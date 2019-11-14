@@ -5,6 +5,7 @@ export const initialState = {
   sortDir: true,
   first: 6,
   skip: 0,
+  score: 0,
   movies: []
 }
 
@@ -21,11 +22,17 @@ export const reducer = (state, action) => {
           sortField: action.sortField
       };
 
-      case 'UPDATE_MOVIES':
-        return {
-            ...state,
-            movies: action.movies
-        };
+    case 'UPDATE_MOVIES':
+      return {
+          ...state,
+          movies: action.movies
+      };
+    
+    case 'UPDATE_SCORE':
+      return {
+          ...state,
+          score: action.score
+      };
     
     default:
       return state;

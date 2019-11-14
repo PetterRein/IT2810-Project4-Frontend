@@ -27,7 +27,7 @@ function Movie({ movieObject }) {
 
 
 export function MovieList(props) {
-		const [{ first, skip, sortField, sortDir, movies }, dispatch] = useStateValue();
+		const [{ first, skip, sortField, sortDir, score, movies }, dispatch] = useStateValue();
 
 		async function fetchMovies() {
 			try {
@@ -36,7 +36,7 @@ export function MovieList(props) {
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify({
 					query: `{
-						movies (first: ${first}, skip: ${skip}, sortField: "${sortField}", sortDir: ${sortDir}){
+						movies (first: ${first}, skip: ${skip}, sortField: "${sortField}", sortDir: ${sortDir}, vote_average: ${score}){
 							title,
 							id,
 							release_date,
@@ -59,10 +59,10 @@ export function MovieList(props) {
 					movies: movies
 				})
 			)
-		}, [ first, skip, sortField, sortDir ]);
+		}, [ first, skip, sortField, sortDir, score ]);
 
 	return (
-		movies.length ? 
+		movies && movies.length ? 
 			<FlatList
 				data={movies}
 				renderItem={({ item }) => <Movie movieObject={item} />}
