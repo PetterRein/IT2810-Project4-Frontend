@@ -7,6 +7,7 @@ export const initialState = {
   skip: 0,
   score: 0,
   search: "",
+  nrMovies: 0,
   movies: []
 }
 
@@ -40,6 +41,18 @@ export const reducer = (state, action) => {
           ...state,
           search: action.search
       };
+    case 'UPDATE_NRMOVIES':
+      return {
+          ...state,
+          nrMovies: action.nrMovies
+      };
+
+    case 'UPDATE_PAGE':
+        return {
+            ...state,
+            skip: action.skip
+        };
+      
     
     default:
       return state;
