@@ -51,18 +51,22 @@ export const SortQuerySelector = () => {
         sortDir: value
       })}}/>)
   return (
-    <Text>
-      Sort by field:
-      <br></br>
+    <>
+      <Text>
+        Sort by field:
+        {"\n"}
+      </Text>
       <RadioForm formHorizontal={true} animation={true}>
         {sortFieldButtons}
       </RadioForm>
-      <br></br>
-      Sort direction:
-      <br></br>
+      <Text>
+        {"\n"}
+        Sort direction:
+        {"\n"}
+      </Text>
       <RadioForm formHorizontal={true} animation={true}>
         {sortFieldDirectionectionButtons}
       </RadioForm>
-    </Text>
+    </>
   )
 }
