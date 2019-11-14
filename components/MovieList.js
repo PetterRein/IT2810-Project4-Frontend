@@ -29,6 +29,7 @@ function Movie({ movieObject }) {
 export function MovieList(props) {
 		const [movies, setMovies] = useState(0);
 		const [{ first, skip, sortField, sortDir }, dispatch] = useStateValue();
+
 		async function fetchMovies() {
 			const res = await fetch(API_KEY + '/graphql', {
 				method: 'POST',
@@ -54,7 +55,7 @@ export function MovieList(props) {
 				console.log('There has been a problem with your fetch operation: ' + error.message);
 				throw error;
 			});
-		}, [{ first, skip, sortField, sortDir }, dispatch]);
+		}, [ first, skip, sortField, sortDir ]);
 
 
 	return (
