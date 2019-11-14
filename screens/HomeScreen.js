@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, {useReducer} from 'react';
 import {
   Image,
   Platform,
@@ -11,19 +11,21 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
 import { MonoText } from '../components/StyledText';
 
-
 import { SortQuerySelector } from '../components/SortQuerySelector'
+
+import {initialState, reducer, StateProvider} from '../store/Store'
 
 
 export default function HomeScreen() {
 
   return (
+	<StateProvider initialState={initialState} reducer={reducer}>
 		<SafeAreaView style={styles.container}>
-			<SortQuerySelector sortFieldChecked={''} sortDirChecked={'true'}/>
+			<SortQuerySelector />
 		</SafeAreaView>
+	</StateProvider>
 	);
 }
 
