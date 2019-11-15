@@ -12,25 +12,7 @@ function Options (value) {
 
 // Lager et object som lar deg velge hvilken side du skal være på
 export const PageSelector = () => {
-  const [{ first, search, score, nrMovies, skip }, dispatch] = useStateValue();
-
-  async function fetchNrMovies() {
-    try {
-      const res = await fetch(API_KEY + '/graphql', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          query: `{
-            numberOfMovies (filter: "${search}", vote_average: ${score})
-          }` 
-        }),
-      });
-      let responseJson = await res.json()
-      return responseJson.data.numberOfMovies
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const [{ first, nrMovies, skip }, dispatch] = useStateValue();
 
   function  handleChange (page) {
     dispatch({
@@ -38,14 +20,6 @@ export const PageSelector = () => {
 			skip: page * first
     })
   }
-
-  useEffect(() => {
-    fetchNrMovies().then(numberOfMovies =>
-      dispatch({
-        type: 'UPDATE_NRMOVIES',
-				nrMovies: numberOfMovies
-      }))
-  }, [search, score]);
 
   useEffect(() => {
     retrieveData("page").then(page => {

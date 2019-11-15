@@ -49,7 +49,8 @@ export const reducer = (state, action) => {
     case 'UPDATE_MOVIES':
       return {
           ...state,
-          movies: action.movies
+          movies: action.movies.movies,
+          nrMovies: action.movies.nrMovies
       };
     
     case 'UPDATE_SCORE':

@@ -36,17 +36,20 @@ export function MovieList(props) {
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify({
 					query: `{
-						movies (filter: "${search}", first: ${first}, skip: ${skip}, sortField: "${sortField}", sortDir: ${sortDir}, vote_average: ${score}){
-							title,
-							id,
-							release_date,
-							poster_path,
-							vote_average
+						movieList (filter: "${search}", first: ${first}, skip: ${skip}, sortField: "${sortField}", sortDir: ${sortDir}, vote_average: ${score}){
+							movies {
+								title,
+								id,
+								release_date,
+								poster_path,
+								vote_average
+							}
+							nrMovies
 						}
 					}` }),
 				});
 				let responseJson = await res.json()
-				return responseJson.data.movies
+				return responseJson.data.movieList
 			} catch (error) {
 				console.log(error)
 			}
