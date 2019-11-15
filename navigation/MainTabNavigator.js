@@ -8,7 +8,7 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const config = Platform.select({
-  web: { headerMode: 'screen' },
+  web: { headerMode: 'none' },
   default: {},
 });
 
@@ -31,6 +31,7 @@ HomeStack.navigationOptions = {
       }
     />
   ),
+  tabBarVisible: false
 };
 
 HomeStack.path = '';
@@ -47,6 +48,7 @@ LinksStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
+  tabBarVisible: false
 };
 
 LinksStack.path = '';
@@ -63,6 +65,7 @@ SettingsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
+  tabBarVisible: false
 };
 
 SettingsStack.path = '';

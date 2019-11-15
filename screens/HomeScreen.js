@@ -14,16 +14,14 @@ import {
 import { MonoText } from '../components/StyledText';
 
 import { SortQuerySelector } from '../components/SortQuerySelector'
-import { MovieList } from '../components/MovieList'
+import MovieList from '../components/MovieList'
 
-import {reducer, StateProvider, initialState} from '../store/Store'
 import { ScoreQuerySelector } from '../components/ScoreQuerySelector';
 import { SearchField } from '../components/SearchQuerySelector';
 import { PageSelector } from '../components/Pagination';
 
 export default function HomeScreen() {
   return (
-	<StateProvider initialState={initialState} reducer={reducer}>
 		<SafeAreaView style={styles.container}>
 			<SearchField />
 			<SortQuerySelector />
@@ -32,7 +30,6 @@ export default function HomeScreen() {
       <MovieList/>
 			<PageSelector />
 		</SafeAreaView>
-	</StateProvider>
 	);
 }
 

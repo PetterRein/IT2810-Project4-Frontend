@@ -28,7 +28,8 @@ export const initialState = {
   score: 0,
   search: "",
   nrMovies: 0,
-  movies: []
+  movies: [],
+  movieId: ""
 }
 
 export const reducer = (state, action) => {
@@ -93,6 +94,11 @@ export const reducer = (state, action) => {
       return {
           ...state,
           skip: action.skip
+      };
+    case 'UPDATE_SELECTEDMOVIE':
+      return {
+        ...state,
+        movieId: action.movieId
       };
       
     default:

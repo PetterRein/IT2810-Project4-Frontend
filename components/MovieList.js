@@ -1,6 +1,7 @@
 import React, {Component, useEffect, useState} from 'react';
 import { API_KEY } from 'react-native-dotenv'
 import { useStateValue } from '../store/Store';
+import { withNavigation } from 'react-navigation';
 
 import {
 	Text,
@@ -8,14 +9,23 @@ import {
 	FlatList,
 	StyleSheet,
 	Image,
+	TouchableHighlight
 } from 'react-native';
 
 import { styles } from '../screens/HomeScreen'
 
 import { ListItem } from 'react-native-material-ui';
-
-function Movie({ movieObject }) {
+function Movie({dispatch, movieObject, navigation }) {
+	const onPress = () => {
+		dispatch({
+			type: 'UPDATE_SELECTEDMOVIE',
+			movieId: movieObject.id
+		})
+		navigation.navigate('Links')
+	}
 	return (
+		<TouchableHighlight onPress={onPress}>
+
 		<View  style={styles.container}>
 			<ListItem 
 				leftElement={	<Image style={{width: 40, height: 50}} source={{uri: API_KEY + '/images' + movieObject.poster_path}} /> }
@@ -25,11 +35,13 @@ function Movie({ movieObject }) {
 				}}
 			/>
 		</View>
+		</TouchableHighlight>
+
 	);
 }
 
 
-export function MovieList(props) {
+const MovieList = (props) => {
 		const [{ first, skip, sortField, sortDir, score, search, movies }, dispatch] = useStateValue();
 
 		async function fetchMovies() {
@@ -72,7 +84,7 @@ export function MovieList(props) {
 		<View style={styles.container}>
 			<FlatList
 				data={movies}
-				renderItem={({ item }) => <Movie movieObject={item} />}
+				renderItem={({ item }) => <Movie movieObject={item} dispatch={dispatch} navigation={props.navigation} />}
 				keyExtractor={item => item.id} /> 
 		</View>
 			:
@@ -82,3 +94,5 @@ export function MovieList(props) {
 		);
 }
 
+
+export default withNavigation(MovieList)
