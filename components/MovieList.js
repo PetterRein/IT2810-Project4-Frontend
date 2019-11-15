@@ -67,7 +67,7 @@ export function MovieList(props) {
 				data={movies}
 				renderItem={({ item }) => <Movie movieObject={item} />}
 				keyExtractor={item => item.id}
-			/> : <></>
+			/> : <Text style={styles.text}> No movies found with the search params </Text>
 		);
 }
 

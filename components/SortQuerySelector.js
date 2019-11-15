@@ -1,5 +1,5 @@
-import React from 'react'
-import { useStateValue } from '../store/Store';
+import React, {useEffect} from 'react'
+import { useStateValue, retrieveData } from '../store/Store';
 
 import {
   Text,
@@ -36,6 +36,7 @@ function RadioButtons (props) {
 };
 export const SortQuerySelector = () => {
   const [{ sortField, sortDir }, dispatch] = useStateValue();
+
   const sortFields = [{ name: 'Title', value: 'title', type: 'field' }, { name: 'Release Date', value: 'release_date', type: 'field' }, { name: 'Score', value: 'vote_average', type: 'field' }]
   const sortFieldButtons = sortFields.map((field) =>
     <RadioButtons checked={sortField} key={field.name} name={field.name} value={field.value} type={field.type} onPress={(value) => { 
@@ -50,6 +51,17 @@ export const SortQuerySelector = () => {
         type: 'UPDATE_SORTDIR',
         sortDir: value
       })}}/>)
+
+  useEffect(() => {
+    retrieveData("sortDir").then(sortDir => {
+      if (sortDir){
+        dispatch({
+          type: 'UPDATE_SORTDIR',
+          sortDir: sortDir === 'true'
+        })
+      }
+    })
+  }, [])
   return (
     <>
       <Text>

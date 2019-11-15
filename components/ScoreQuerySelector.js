@@ -1,5 +1,5 @@
-import React from 'react'
-import { useStateValue } from '../store/Store';
+import React, { useEffect } from 'react'
+import { useStateValue, retrieveData } from '../store/Store';
 
 import {
   Text,
@@ -35,6 +35,17 @@ function RadioButtons (props) {
 };
 
 export const ScoreQuerySelector = () => {
+  useEffect(() => {
+    retrieveData("score").then(score => {
+      if (score){
+        dispatch({
+          type: 'UPDATE_SCORE_INITIAL',
+          score: parseInt(score)
+        })
+      }
+    })
+  }, [])
+
   const [{ score }, dispatch] = useStateValue();
   const legalValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   const valueButtons = legalValues.map((value) =>
