@@ -41,7 +41,7 @@ export const PageSelector = () => {
 
   return  ( 
     numberOfPagesNeeded && pages && pages.length ?
-      <Picker selectedValue={selectedPage} onValueChange={handleChange} style={{height: 50, width: 100}}>
+      <Picker selectedValue={selectedPage} onValueChange={handleChange} style={{height: 50, width: 150}}>
         {pages}
       </Picker>
 	  : <></>
