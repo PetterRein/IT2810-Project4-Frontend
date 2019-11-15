@@ -10,8 +10,9 @@ import {
 	FlatList,
 	StyleSheet,
 	Image,
-	TouchableHighlight
+  TouchableHighlight
 } from 'react-native';
+import { Button } from 'react-native-paper';
 
 
 const DetailView = (props) => {
@@ -34,6 +35,7 @@ const DetailView = (props) => {
             release_date
             vote_average
             comments {
+              id
               comment
             }
           }
@@ -52,35 +54,46 @@ const DetailView = (props) => {
     }
     )
   }, [ movieId ]);
-  const release_date_convert = new Date(movie.release_date)
-  const release_date = release_date_convert.getDate() + "." + release_date_convert.getMonth() + "." + release_date_convert.getFullYear()
-  const comments = movie.comments
-  console.log(comments)
+  let release_date 
+  let comments
+  if (movie) {
+    const release_date_convert = new Date(movie.release_date)
+    release_date = release_date_convert.getDate() + "." + release_date_convert.getMonth() + "." + release_date_convert.getFullYear()
+    comments = movie.comments
+  }
+  console.log("comments: ", comments)
   return (
     movie ? 
-    <TouchableHighlight onPress={() => props.navigation.navigate('Home')} >
-      <View  style={styles.container} >
-      <Image
-        style={{width: 150, height: 300}}
-        source={{uri: API_KEY + '/images' + movie.poster_path}}
-      />
-      <Text style={styles.text}>{movie.title}</Text>
-      <Text style={styles.text}>Release date: {release_date}</Text>
-      <Text style={styles.text}>Score: {movie.vote_average}</Text>
-      <Text style={styles.text}>Comments:</Text>
-      <FlatList
-				data={comments}
-				renderItem={( item ) => <Text>{item.comment}</Text>}
-				keyExtractor={item => item.comment} /> 
-    </View>
-    </TouchableHighlight> : <></>
+      <>
+      <TouchableHighlight onPress={() => props.navigation.navigate('Home')} >
+        <View style={styles.container} >
+          <Image
+            style={{width: 300, height: 400}}
+            source={{uri: API_KEY + '/images' + movie.poster_path}}
+          />
+          <Text style={styles.text}>{movie.title}</Text>
+          <Text style={styles.text}>Release date: {release_date}</Text>
+          <Text style={styles.text}>Score: {movie.vote_average}</Text>
+          <Text style={styles.text}>Comments:</Text>
+          <View style={styles.container}>
+          <FlatList
+            data={comments}
+            renderItem={( item ) => <Text style={styles.text}>{item.comment}</Text>}
+            keyExtractor={item => item.id} /> 
+            </View>
+        </View>
+      </TouchableHighlight> 
+      <Button style={styles.button} title="Press Purple"  onPress={() => props.navigation.navigate('Home')} >Go Back</Button>
+      </>
+     : <></>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
+    paddingTop: 30,
+    paddingLeft: 30,
     backgroundColor: '#fff',
   },
   item: {
@@ -88,7 +101,11 @@ const styles = StyleSheet.create({
     height: 100,
   },
   text: {
+    color: '#000',
     fontSize: 30
+  },
+  button: {
+    paddingTop: 700
   }
 });
 
