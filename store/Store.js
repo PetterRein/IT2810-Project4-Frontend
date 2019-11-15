@@ -5,7 +5,7 @@ const storeData = async (key, value) => {
   try {
     await AsyncStorage.setItem(key, value.toString());
   } catch (error) {
-    console.error("Error saving data: " + error)
+    console.log("Error saving data: " + error)
   }
 };
 
@@ -48,6 +48,7 @@ export const reducer = (state, action) => {
       };
 
     case 'UPDATE_MOVIES':
+      if(action.movies)
       return {
           ...state,
           movies: action.movies.movies,

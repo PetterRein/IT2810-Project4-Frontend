@@ -12,8 +12,6 @@ import {
 	TouchableHighlight
 } from 'react-native';
 
-import { styles } from '../screens/HomeScreen'
-
 import { ListItem } from 'react-native-material-ui';
 function Movie({dispatch, movieObject, navigation }) {
 	const onPress = () => {
@@ -89,10 +87,34 @@ const MovieList = (props) => {
 		</View>
 			:
 		<View style={styles.container}>
-			<Text style={styles.text}> No movies found with the search params </Text>
+			<Text style={styles.text}> No movies found with the search params or network fetch failed</Text>
 		</View>
 		);
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+	row: {
+		    flex: 1,
+		    flexDirection: 'row',
+		    flexWrap: 'wrap',
+		    alignItems: 'center',
+				paddingHorizontal: 22,
+	},
+	movie: {
+		backgroundColor: '#f9c2ff',
+		padding: 20,
+		marginVertical: 8,
+		marginHorizontal: 16,
+	},
+  col: {
+		    width: '50%' // is 50% of container width
+	},
+	box: {
+		paddingHorizontal: 22,
+	}
+});
 
 export default withNavigation(MovieList)

@@ -6,8 +6,6 @@ import {
   TextInput
 } from 'react-native';
 
-import { styles } from '../screens/HomeScreen'
-
 import { Toolbar } from 'react-native-material-ui';
 
 
