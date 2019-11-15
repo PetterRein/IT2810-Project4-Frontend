@@ -21,6 +21,8 @@ function Movie({dispatch, movieObject, navigation }) {
 		})
 		navigation.navigate('Links')
 	}
+	const release_date_convert = new Date(movieObject.release_date)
+  const release_date = release_date_convert.getDate() + "." + release_date_convert.getMonth() + "." + release_date_convert.getFullYear()
 	return (
 		<TouchableHighlight onPress={onPress}>
 
@@ -29,7 +31,7 @@ function Movie({dispatch, movieObject, navigation }) {
 				leftElement={	<Image style={{width: 40, height: 50}} source={{uri: API_KEY + '/images' + movieObject.poster_path}} /> }
 				centerElement={{
 					primaryText: movieObject.title,
-					secondaryText: movieObject.release_date + " " + movieObject.vote_average,
+					secondaryText: "Release date: " + release_date + ", Score: " + movieObject.vote_average,
 				}}
 			/>
 		</View>
