@@ -31,7 +31,6 @@ export const PageSelector = () => {
       }
     })
   }, [])
-
   const numberOfPagesNeeded =  Math.ceil(nrMovies / first)
   const pages = []
 
