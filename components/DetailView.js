@@ -52,6 +52,10 @@ const DetailView = (props) => {
     }
     )
   }, [ movieId ]);
+  const release_date_convert = new Date(movie.release_date)
+  const release_date = release_date_convert.getDate() + "." + release_date_convert.getMonth() + "." + release_date_convert.getFullYear()
+  const comments = movie.comments
+  console.log(comments)
   return (
     movie ? 
     <TouchableHighlight onPress={() => props.navigation.navigate('Home')} >
@@ -61,8 +65,13 @@ const DetailView = (props) => {
         source={{uri: API_KEY + '/images' + movie.poster_path}}
       />
       <Text style={styles.text}>{movie.title}</Text>
-      <Text style={styles.text}>{movie.release_date}</Text>
-      <Text style={styles.text}>{movie.vote_average}</Text>
+      <Text style={styles.text}>Release date: {release_date}</Text>
+      <Text style={styles.text}>Score: {movie.vote_average}</Text>
+      <Text style={styles.text}>Comments:</Text>
+      <FlatList
+				data={comments}
+				renderItem={( item ) => <Text>{item.comment}</Text>}
+				keyExtractor={item => item.comment} /> 
     </View>
     </TouchableHighlight> : <></>
   )
