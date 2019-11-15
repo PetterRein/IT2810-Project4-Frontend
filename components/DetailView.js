@@ -19,6 +19,8 @@ const DetailView = (props) => {
   const [movie, setMovie] = useState(0);
 
   async function fetchMovies() {
+    // dont remove the console log below, the fetch wont load if not
+    console.log("")
     try {
       const res = await fetch(API_KEY + '/graphql', {
         method: 'POST',

@@ -6,7 +6,6 @@ import {
 	StyleSheet,
 } from 'react-native';
 
-import { styles } from '../screens/HomeScreen'
 import { Checkbox } from 'react-native-paper';
 import { RadioButton } from 'react-native-paper';
 import { Divider, Text, Title } from 'react-native-paper';
@@ -83,3 +82,27 @@ export const SortQuerySelector = () => {
   )
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+	row: {
+		    flex: 1,
+		    flexDirection: 'row',
+		    flexWrap: 'wrap',
+		    alignItems: 'center',
+				paddingHorizontal: 22,
+	},
+	movie: {
+		backgroundColor: '#f9c2ff',
+		padding: 20,
+		marginVertical: 8,
+		marginHorizontal: 16,
+	},
+  col: {
+		    width: '50%' // is 50% of container width
+	},
+	box: {
+		paddingHorizontal: 22,
+	}
+});

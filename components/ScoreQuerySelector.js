@@ -4,10 +4,10 @@ import { useStateValue, retrieveData } from '../store/Store';
 import {
   Text,
 	View,
+	StyleSheet
 } from 'react-native';
 import { RadioButton, Card, Drawer } from 'react-native-material-ui';
 
-import { styles } from '../screens/HomeScreen'
 import { Title, Divider } from 'react-native-paper';
 
 import {
@@ -49,3 +49,28 @@ export const ScoreQuerySelector = () => {
 		</View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+	row: {
+		    flex: 1,
+		    flexDirection: 'row',
+		    flexWrap: 'wrap',
+		    alignItems: 'center',
+				paddingHorizontal: 22,
+	},
+	movie: {
+		backgroundColor: '#f9c2ff',
+		padding: 20,
+		marginVertical: 8,
+		marginHorizontal: 16,
+	},
+  col: {
+		    width: '50%' // is 50% of container width
+	},
+	box: {
+		paddingHorizontal: 22,
+	}
+});
