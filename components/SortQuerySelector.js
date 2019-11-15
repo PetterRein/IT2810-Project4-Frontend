@@ -14,16 +14,20 @@ import { Divider, Text, Title } from 'react-native-paper';
 
 
 export const SortQuerySelector = () => {
-  const [{ sortField, sortDir }, dispatch] = useStateValue();
+	const [{ sortField, sortDir }, dispatch] = useStateValue();
 
   useEffect(() => {
     retrieveData("sortDir").then(sortDir => {
-      if (sortDir){
-        dispatch({
-          type: 'UPDATE_SORTDIR',
-          sortDir: sortDir == 'true'
-        })
-      }
+			dispatch({
+				type: 'UPDATE_SORTDIR',
+				sortDir: sortDir
+			})
+		})
+		retrieveData("sortField").then(sortField => {
+			dispatch({
+				type: 'UPDATE_SORTFIELD',
+				sortField: sortField
+			})
     })
   }, [])
   return (
