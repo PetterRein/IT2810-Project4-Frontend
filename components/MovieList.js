@@ -10,17 +10,20 @@ import {
 	Image,
 } from 'react-native';
 
+import { styles } from '../screens/HomeScreen'
+
+import { ListItem } from 'react-native-material-ui';
 
 function Movie({ movieObject }) {
 	return (
 		<View  style={styles.container}>
-			<Image
-        style={{width: 150, height: 300}}
-        source={{uri: API_KEY + '/images' + movieObject.poster_path}}
-      />
-			<Text style={styles.text}>{movieObject.title}</Text>
-			<Text style={styles.text}>{movieObject.release_date}</Text>
-			<Text style={styles.text}>{movieObject.vote_average}</Text>
+			<ListItem 
+				leftElement={	<Image style={{width: 40, height: 50}} source={{uri: API_KEY + '/images' + movieObject.poster_path}} /> }
+				centerElement={{
+					primaryText: movieObject.title,
+					secondaryText: movieObject.release_date + " " + movieObject.vote_average,
+				}}
+			/>
 		</View>
 	);
 }
@@ -63,28 +66,16 @@ export function MovieList(props) {
 
 	return (
 		movies && movies.length ? 
+		<View style={styles.container}>
 			<FlatList
 				data={movies}
 				renderItem={({ item }) => <Movie movieObject={item} />}
-				keyExtractor={item => item.id}
-			/> : <Text style={styles.text}> No movies found with the search params </Text>
+				keyExtractor={item => item.id} /> 
+		</View>
+			:
+		<View style={styles.container}>
+			<Text style={styles.text}> No movies found with the search params </Text>
+		</View>
 		);
 }
-
-
-
-const styles = StyleSheet.create({
-	  container: {
-			   flex: 1,
-				 paddingTop: 22,
-				 paddingLeft: 22,
-			  },
-	  item: {
-			    padding: 10,
-			    height: 100,
-				},
-		text: {
-			fontSize: 30
-		}
-})
 
